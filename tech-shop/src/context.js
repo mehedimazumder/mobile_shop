@@ -10,6 +10,9 @@ class ProductProvider extends Component {
         products: [],
         detaiProduct: detailProduct
     };
+    componentDidMount(){
+        this.setProducts();
+    };
     setProducts = () => {
         let tempProducts = [];
         storeProducts.forEach(item => {

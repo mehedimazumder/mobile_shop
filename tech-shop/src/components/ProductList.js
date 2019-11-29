@@ -9,7 +9,6 @@ export default class   extends Component {
         Products: storeProducts
     }
     render() {
-        console.log(this.state.Products);
         return ( 
            <React.Fragment>
                <div className="py-5">
