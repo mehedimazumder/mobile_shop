@@ -8,9 +8,9 @@ export default class Details extends Component {
         return (
             <ProductConsumer>
                 {value => {
-                    const {id, company, info, img, price, title, inCart} = value.detaiProduct;
+                    const {id, company, img, info, price, title, inCart} = value.detailProduct;
                     return(
-                        <div className="container py-5">
+                        <div className="container py-5" onClick={() => console.log(id)}>
                             {/*title */}
                             <div className="row">
                                 <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
@@ -45,8 +45,9 @@ export default class Details extends Component {
                                         </Link> 
                                         <ButtonContainer cart
                                         disabled={inCart? true:false}
-                                        onClick={(id) => {
+                                        onClick={() => {
                                             value.addToCart(id);
+                                            value.openModal(id)
                                         }}>
                                            {inCart? "in cart" : "add to cart"}         
                                         </ButtonContainer>

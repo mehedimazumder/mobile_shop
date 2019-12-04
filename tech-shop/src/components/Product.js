@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import propTypes from 'prop-types';
+import { ProductConsumer } from '../context';
 
 export default class Product extends Component {
     render() {
@@ -9,20 +10,27 @@ export default class Product extends Component {
         return (
             <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card">
-                    <div className="img-container p-5" onClick={() => console.log("img contain")}>
-                        <Link to="/details">
-                            <img src={img} alt="product" className="card-img-top"/>
-                        </Link>
-                        <button className="card-btn" disabled={inCart? true : false}
-                        onClick={() => console.log("added cart")}>
-                        {inCart ? (
-                            <p className="text-capitalize mb-0" disabled>
-                                {" "}
-                                In cart
-                            </p>
-                        ) : (<i className="fas fa-cart-plus"></i>)}
-                        </button>
-                    </div>
+                    <ProductConsumer>
+                        {(value) => (
+                            <div className="img-container p-5" onClick={() => value.handleDetail(id)}>
+                            <Link to="/details">
+                                <img src={img} alt="product" className="card-img-top"/>
+                            </Link>
+                            <button className="card-btn" disabled={inCart? true : false}
+                            onClick={() => {value.addToCart(id);
+                            value.openModal(id)}
+                            }>
+                            {inCart ? (
+                                <p className="text-capitalize mb-0" disabled>
+                                    {" "}
+                                    In cart
+                                </p>
+                            ) : (<i className="fas fa-cart-plus"></i>)}
+                            </button>
+                        </div>
+                        )}
+                        
+                    </ProductConsumer>
                     {/* card footer*/}
                     <div className="card-footer d-flex justify-content-between">
                         <p className="align-self-center mb-0">
